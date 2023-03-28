@@ -1,6 +1,12 @@
 const express = require("express");
 const http = require("http");
 const mysql = require("mysql2/promise");
+const MongoClient = require("mongodb").MongoClient;
+const uri = "mongodb://mongodb:mongodb@mongodb-12345:27017/rtdata";
+const client = new MongoClient(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 const app = express();
 app.use(express.json());
@@ -24,6 +30,19 @@ app.get("/", (req, res) => {
 app.get("/mysql", async function (req, res) {
   let retObj = await mysqlx.query("SELECT * From user;");
   res.status(200).json(retObj);
+});
+
+app.get("/mongodb", async function (req, res) {
+  client.connect((err) => {
+    const collection = client.db("test").collection("devices");
+    // perform actions on the collection object
+    console.log("已连接到mongodb");
+    res.status(200).json({
+      code: 0,
+      msg: "已连接到mongodb",
+    });
+    client.close();
+  });
 });
 
 const httpServer = http.createServer(app);
