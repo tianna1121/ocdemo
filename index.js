@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const { InfluxDB } = require("@influxdata/influxdb-client");
 const redis = require("redis");
 
-const redisClient = redis.createClient(6379, "http://redis");
+const redisClient = redis.createClient("redis", 6379, {});
 redisClient.on("connect", function () {
   console.log("Redis connected!");
 });
