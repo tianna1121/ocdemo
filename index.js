@@ -66,7 +66,7 @@ app.get("/influxdb", async function (req, res) {
         console.log(o);
         outJson.push({
           time: o._time,
-          value: _value,
+          value: o._value,
         });
       },
       error(error) {
