@@ -2,7 +2,6 @@ const express = require("express");
 const http = require("http");
 const mysql = require("mysql2/promise");
 const MongoClient = require("mongodb").MongoClient;
-const mongourl = "mongodb://mongodb:mongodb@mongodb:27017/test";
 
 const app = express();
 app.use(express.json());
@@ -30,7 +29,7 @@ app.get("/mysql", async function (req, res) {
 
 app.get("/mongodb", async function (req, res) {
   MongoClient.connect(
-    mongourl,
+    "mongodb://mongodb:mongodb@mongodb:27017/test?authMechanism=MONGODB-CR",
     { useUnifiedTopology: true },
     function (err, client) {
       const db = client.db("test");
