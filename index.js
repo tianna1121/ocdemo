@@ -51,7 +51,6 @@ app.get("/mongodb", async function (req, res) {
 
 app.get("/influxdb", async function (req, res) {
   var outJson = [];
-  console.log("访问到influxdb接口了");
 
   const queryApi = new InfluxDB({
     url: "http://influxdb:8086",
@@ -70,7 +69,11 @@ app.get("/influxdb", async function (req, res) {
           value: _value,
         });
       },
+      error(error) {
+        console.log("QUERY FAILED", error);
+      },
       complete() {
+        console.log(outJson);
         res.status(200).json({
           code: 0,
           data: outJson,
