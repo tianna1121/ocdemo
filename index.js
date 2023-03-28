@@ -7,8 +7,8 @@ app.use(express.json());
 
 const mysqlx = mysql.createPool({
   user: "root",
-  password: "Imtianna1121",
-  database: "myssql",
+  password: "6zbMNFmCSl7b/UKfB42N4A",
+  database: "mysql",
   connectionLimit: 10,
   queueLimit: 0,
 });
