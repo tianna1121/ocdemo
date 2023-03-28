@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 mongoose.connect("mongodb://mongodb:mongodb@mongodb:27017/test", {
   useNewUrlParser: true,
 });
-
+var conn = mongoose.connection;
 conn.on("connected", function () {
   console.log("database is connected successfully");
 });
