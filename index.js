@@ -3,6 +3,12 @@ const http = require("http");
 const mysql = require("mysql2/promise");
 const mongoose = require("mongoose");
 const { InfluxDB } = require("@influxdata/influxdb-client");
+const redis = require("redis");
+
+const redisClient = redis.createClient(6379, "http://redis");
+redisClient.on("connect", function () {
+  console.log("Connected!");
+});
 
 mongoose.connect("mongodb://mongodb:mongodb@mongodb:27017/test", {
   useNewUrlParser: true,
