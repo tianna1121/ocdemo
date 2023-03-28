@@ -50,7 +50,8 @@ app.get("/mongodb", async function (req, res) {
 });
 
 app.get("/influxdb", async function (req, res) {
-  var outJson = {};
+  var outJson = [];
+  console.log("访问到influxdb接口了");
 
   const queryApi = new InfluxDB({
     url: "http://influxdb:8086",
