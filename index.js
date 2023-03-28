@@ -29,7 +29,7 @@ app.get("/mysql", async function (req, res) {
 
 app.get("/mongodb", async function (req, res) {
   MongoClient.connect(
-    "mongodb://mongodb:mongodb@mongodb",
+    "mongodb://mongodb:mongodb@mongodb:27017/test",
     { useUnifiedTopology: true },
     function (err, client) {
       const db = client.db("test");
