@@ -35,13 +35,13 @@ app.get("/mongodb", async function (req, res) {
   });
 });
 
-MongoClient.connect(
-  mongourl,
-  { useUnifiedTopology: true },
-  function (err, client) {
-    const db = client.db("test");
-    console.log("已连接到mongodb的test数据库");
-    const httpServer = http.createServer(app);
-    httpServer.listen(8080);
-  }
-);
+// MongoClient.connect(
+//   mongourl,
+//   { useUnifiedTopology: true },
+//   function (err, client) {
+//     const db = client.db("test");
+//     console.log("已连接到mongodb的test数据库");
+const httpServer = http.createServer(app);
+httpServer.listen(8080);
+//   }
+// );
