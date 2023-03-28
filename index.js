@@ -1,7 +1,20 @@
 const express = require("express");
 const http = require("http");
 const mysql = require("mysql2/promise");
-const MongoClient = require("mongodb").MongoClient;
+const mongoose = require("mongoose");
+mongoose.connect("mongodb://mongodb:mongodb@mongodb:27017/test", {
+  useNewUrlParser: true,
+});
+
+conn.on("connected", function () {
+  console.log("database is connected successfully");
+});
+
+conn.on("disconnected", function () {
+  console.log("database is disconnected successfully");
+});
+
+conn.on("error", console.error.bind(console, "connection error:"));
 
 const app = express();
 app.use(express.json());
@@ -28,18 +41,10 @@ app.get("/mysql", async function (req, res) {
 });
 
 app.get("/mongodb", async function (req, res) {
-  MongoClient.connect(
-    "mongodb://mongodb:mongodb@mongodb:27017/test",
-    { useUnifiedTopology: true },
-    function (err, client) {
-      const db = client.db("test");
-      console.log("已连接到mongodb的test数据库");
-      res.status(200).json({
-        code: 0,
-        msg: "已连接到mongodb",
-      });
-    }
-  );
+  res.status(200).json({
+    code: 0,
+    msg: "已连接到mongodb",
+  });
 });
 
 const httpServer = http.createServer(app);
