@@ -7,22 +7,23 @@ const redis = require("redis");
 
 const redisClient = redis.createClient(6379, "http://redis");
 redisClient.on("connect", function () {
-  console.log("Connected!");
+  console.log("Redis connected!");
 });
+redisClient.on("error", (err) => console.log("Redis Client Error: ", err));
 
 mongoose.connect("mongodb://mongodb:mongodb@mongodb:27017/test", {
   useNewUrlParser: true,
 });
 var conn = mongoose.connection;
 conn.on("connected", function () {
-  console.log("database is connected successfully");
+  console.log(" mongodb database is connected successfully");
 });
 
 conn.on("disconnected", function () {
-  console.log("database is disconnected successfully");
+  console.log("mongodb database is disconnected successfully");
 });
 
-conn.on("error", console.error.bind(console, "connection error:"));
+conn.on("error", console.error.bind(console, "mongodb connection error:"));
 
 const app = express();
 app.use(express.json());
