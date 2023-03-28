@@ -34,7 +34,7 @@ app.get("/mysql", async function (req, res) {
 
 app.get("/mongodb", async function (req, res) {
   client.connect((err) => {
-    const collection = client.db("test").collection("devices");
+    // const collection = client.db("test").collection("devices");
     // perform actions on the collection object
     console.log("已连接到mongodb");
     res.status(200).json({
