@@ -2,11 +2,7 @@ const express = require("express");
 const http = require("http");
 const mysql = require("mysql2/promise");
 const MongoClient = require("mongodb").MongoClient;
-const uri = "mongodb://mongodb:mongodb@mongodb-12345:27017";
-const client = new MongoClient(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+const mongourl = "mongodb://mongodb:mongodb@mongodb-12345:27017";
 
 const app = express();
 app.use(express.json());
@@ -20,28 +16,32 @@ const mysqlx = mysql.createPool({
   queueLimit: 0,
 });
 
-client.connect((err) => {
-  // const collection = client.db("test").collection("devices");
-  console.log("已连接到mongodb");
-  app.get("/", (req, res) => {
-    res.status(200).json({
-      code: 0,
-      msg: "Welcome to OpenShift Demo",
-    });
+app.get("/", (req, res) => {
+  res.status(200).json({
+    code: 0,
+    msg: "Welcome to OpenShift Demo",
   });
-
-  app.get("/mysql", async function (req, res) {
-    let retObj = await mysqlx.query("SELECT * From user;");
-    res.status(200).json(retObj);
-  });
-
-  app.get("/mongodb", async function (req, res) {
-    res.status(200).json({
-      code: 0,
-      msg: "已连接到mongodb",
-    });
-  });
-
-  const httpServer = http.createServer(app);
-  httpServer.listen(8080);
 });
+
+app.get("/mysql", async function (req, res) {
+  let retObj = await mysqlx.query("SELECT * From user;");
+  res.status(200).json(retObj);
+});
+
+app.get("/mongodb", async function (req, res) {
+  res.status(200).json({
+    code: 0,
+    msg: "已连接到mongodb",
+  });
+});
+
+MongoClient.connect(
+  mongourl,
+  { useUnifiedTopology: true },
+  function (err, client) {
+    const db = client.db("test");
+    console.log("已连接到mongodb的test数据库");
+    const httpServer = http.createServer(app);
+    httpServer.listen(8080);
+  }
+);
