@@ -11,10 +11,6 @@ const redisClient = redis.createClient({
     port: "6379",
   },
 });
-redisClient.on("connect", function () {
-  console.log("Redis connected!");
-});
-redisClient.on("error", (err) => console.log("Redis Client Error: ", err));
 
 mongoose.connect("mongodb://mongodb:mongodb@mongodb:27017/test", {
   useNewUrlParser: true,
@@ -94,6 +90,16 @@ app.get("/influxdb", async function (req, res) {
       },
     }
   );
+});
+
+app.get("/redis", async function (req, res) {
+  redisClient.on("error", (err) => console.log("Redis Client Error", err));
+  await redisClient.connect();
+  await redisClient.set("name", "zy");
+  res.status(200).json({
+    code: 0,
+    msg: "Redis 访问正常",
+  });
 });
 
 const httpServer = http.createServer(app);
