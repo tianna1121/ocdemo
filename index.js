@@ -6,6 +6,7 @@ const app = express();
 app.use(express.json());
 
 const mysqlx = mysql.createPool({
+  host: "mysql8",
   user: "root",
   password: "6zbMNFmCSl7b/UKfB42N4A",
   database: "mysql",
