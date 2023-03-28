@@ -59,7 +59,7 @@ app.get("/influxdb", async function (req, res) {
       "ur6ugfV9HarVQFpNwth5lNu8DbZuUcTZP7NG3yulNXdqbUCYcFq9Id2Iz3TfXulWI_1bc7btAHVrLHzE8-TdjA==",
   }).getQueryApi("pxaiot");
 
-  queryApi.queryRaw(
+  queryApi.queryRows(
     'from(bucket: "test")|> range(start: -1d)|> filter(fn: (r) => r["_measurement"] == "boltdb_reads_total")|> filter(fn: (r) => r["_field"] == "counter")',
     {
       next(row, tableMeta) {
