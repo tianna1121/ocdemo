@@ -2,7 +2,7 @@ const express = require("express");
 const http = require("http");
 const mysql = require("mysql2/promise");
 const MongoClient = require("mongodb").MongoClient;
-const mongourl = "mongodb://mongodb:mongodb@mongodb-12345:27017/test";
+const mongourl = "mongodb://mongodb:mongodb@mongodb:27017/test";
 
 const app = express();
 app.use(express.json());
