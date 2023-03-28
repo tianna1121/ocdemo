@@ -33,17 +33,16 @@ app.get("/mysql", async function (req, res) {
 });
 
 app.get("/mongodb", async function (req, res) {
-  console.log("访问到mongodb的路由");
-  client.connect((err) => {
-    // const collection = client.db("test").collection("devices");
-    console.log("已连接到mongodb");
-    res.status(200).json({
-      code: 0,
-      msg: "已连接到mongodb",
-    });
-    client.close();
+  res.status(200).json({
+    code: 0,
+    msg: "已连接到mongodb",
   });
 });
 
-const httpServer = http.createServer(app);
-httpServer.listen(8080);
+client.connect((err) => {
+  // const collection = client.db("test").collection("devices");
+  console.log("已连接到mongodb");
+
+  const httpServer = http.createServer(app);
+  httpServer.listen(8080);
+});
