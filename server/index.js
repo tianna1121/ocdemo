@@ -98,7 +98,7 @@ app.get("/redis", async function (req, res) {
   await redisClient.set("name", "zy");
   res.status(200).json({
     code: 0,
-    msg: "Redis 访问正常",
+    msg: "Redis 访问正常，测试下openshift的pipeline",
   });
 });
 
