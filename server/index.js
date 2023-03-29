@@ -63,7 +63,7 @@ app.get("/influxdb", async function (req, res) {
   const queryApi = new InfluxDB({
     url: "http://influxdb:8086",
     token:
-      "ur6ugfV9HarVQFpNwth5lNu8DbZuUcTZP7NG3yulNXdqbUCYcFq9Id2Iz3TfXulWI_1bc7btAHVrLHzE8-TdjA==",
+      "-g2_wtRsWDSzWCk-4g5UpVMORwKTmQAZKvH9lq5lWn2c6WSczMJPP1bOYiUR5-9ti7RneAJLBEjZ0clErFSSBw==",
   }).getQueryApi("pxaiot");
 
   queryApi.queryRows(
